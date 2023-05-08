@@ -1,0 +1,5 @@
+Name: Knight
+Weapon: Sword
+Armor: Chainmail
+Health: 100
+Coins: 0
