@@ -945,19 +945,641 @@ def Hide_under_armor():
     
     
 def survival():
-    pass
-    
-    
-def survival_start():
+    cnt = 10
     print("<Now, you can view your fighter data:>")
-    print("\n\n\n")
-    knight = Knight("Knight", "Sword", "Chainmail")
-    knight.print_attributes()
+    print("\n\n")
+    #knight = Knight("Knight", "Sword", "Platemail")
+    knight = Knight("", "", "")
+    knight.load_data("knight.txt")
+    #knight.print_attributes()
+    solider = Knight("Solider", "Sword", "Chainmail")
     time.sleep(5)
     print("Press any key to continue...")
     msvcrt.getch()  # Wait for user input to continue
     clear_screen()  # Recursively call the function to clear the screen again
+    knight.ready_to_fight()
+    print(KN_start)
+    time.sleep(5)
+    clear_screen()
+    print(KN_survival)
+    time.sleep(2)
+    clear_screen()
+    knight.ready_to_fight()
+    print(KN_survival)
+    #
+    while cnt >= 0:
+        if cnt == 10:
+            clear_screen()
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 9:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 8:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 7:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 6:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 5:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 4:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 3:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 2:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 1:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 0:
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            continue_story()
     
+    
+def tournament():
+    if not os.path.exists("tournament.txt"):
+        with open("tournament.txt", "w") as f:
+            f.write("30")
+    with open("tournament.txt", "r") as f:
+        cnt = int(f.read())
+    if cnt == 30:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        solider = Knight("Solider", "Sword", "Chainmail")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_survival)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_survival)
+        #
+        clear_screen()
+        knight.turn_survival_start(solider)
+        print(KN_survival)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("tournament.txt", "w") as f:
+            f.write(str(cnt))
+    elif cnt == 29:
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        
+    
+    
+def bodyguards():
+    pass
+    
+    
+def store():
+    print(Axe)
+    print(Sword)
+    
+    
+KN_start = """
+     _
+    /_\\                        
+   -_|_-                        
+    /|\\   _____                
+   /|||\\-|_____/        
+    / \\                        
+   /   \\                     
+"""    
+
+
+KN_survival = """
+     _
+    /_\\                        /\\
+   -_|_-                       \\/
+    /|\\   _____                ||
+   /|||\\-|_____/         ---/-/  \\
+    / \\                        / \\
+   /   \\                      /   \\
+"""
+
+    
+def survival_start():
+    cnt = 10
+    print("<Now, you can view your fighter data:>")
+    print("\n\n")
+    knight = Knight("Knight", "Sword", "Platemail")
+    knight.print_attributes()
+    solider = Knight("Solider", "Sword", "Chainmail")
+    time.sleep(5)
+    print("Press any key to continue...")
+    msvcrt.getch()  # Wait for user input to continue
+    clear_screen()  # Recursively call the function to clear the screen again
+    print("""
+        MOROW
+        
+           /\\
+          /00\\
+         /    \\
+         
+         Now, let's see your training!
+         
+    """)
+    time.sleep(3)
+    print("Press any key to continue...")
+    msvcrt.getch()  # Wait for user input to continue
+    clear_screen()  # Recursively call the function to clear the screen again
+    knight.ready_to_fight()
+    print(KN_start)
+    time.sleep(5)
+    clear_screen()
+    print(KN_survival)
+    time.sleep(2)
+    clear_screen()
+    knight.ready_to_fight()
+    print(KN_survival)
+    #
+    while cnt >= 0:
+        if cnt == 10:
+            clear_screen()
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 9:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 8:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 7:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 6:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 5:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 4:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 3:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 2:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 1:
+            clear_screen()
+            #knight = Knight("Knight", "Sword", "Platemail")
+            solider = Knight("Solider", "Sword", "Chainmail")
+            print(KN_start)
+            time.sleep(5)
+            clear_screen()
+            print(KN_survival)
+            time.sleep(2)
+            clear_screen()
+            knight.ready_to_fight()
+            print(KN_survival)#
+            knight.turn_survival_start(solider)
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #knight.ready_to_fight()
+            cnt -= 1
+        elif cnt == 0:
+            print("""
+                MOROW
+                
+                   /\\
+                  /00\\
+                 /    \\
+                 
+                 Wow...
+                 
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW
+                
+                   /\\
+                  /00\\
+                 /    \\
+                 
+                 I have never seen such a fighting style before!
+                 It's amazing!
+                 
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW
+                
+                   /\\
+                  /00\\
+                 /    \\
+                 
+                 And you passed all the rounds... You are capable, son.
+                 
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            time.sleep(2)
+            print("To be continue...")
+            time.sleep(5)
+            clear_screen()
+            time.sleep(4)
+            print("""
+                MOROW
+                
+                   /\\
+                  /00\\
+                 /    \\
+                 
+                 Hmm... I'm thinking about it.
+                 But in the meantime, how about trying a fight with one of the local champions?
+                 
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            legend_open = False
+            while not legend_open:
+                print("<Type L to reopen the legend.>")
+                choose = input()
+                if choose.lower() == "l":
+                    print_legend()
+                    legend_open = True
+                    clear_screen()  # Recursively call the function to clear the screen again
+                else:
+                    print("Invalid input. Please try again!")
+                    clear_screen()  # Recursively call the function to clear the screen again
+            tournament_open = False
+            while not tournament_open:
+                print("<Type 3 to go to tournament place.>")
+                choose = input()
+                if choose== "3":
+                    tournament_start()
+                    tournament_open = True
+                    clear_screen()  # Recursively call the function to clear the screen again
+                else:
+                    print("Invalid input. Please try again!")
+                    clear_screen()  # Recursively call the function to clear the screen again
+
+
+def tournament_start():
+    print("""
+        MOROW
+        
+           /\\
+          /00\\
+         /    \\
+         
+         Here is the tournament place. Before moving on, don't let yourself be influenced by their appearances.
+         
+    """)
+    time.sleep(3)
+    print("Press any key to continue...")
+    msvcrt.getch()  # Wait for user input to continue
+    clear_screen()  # Recursively call the function to clear the screen again
+    print("""
+        MOROW
+        
+           /\\
+          /00\\
+         /    \\
+         
+         Here is the tournament place. Before moving on, don't let yourself be influenced by their appearances.
+         They are also remarkable for their scary appearance.
+         
+    """)
+    time.sleep(3)
+    print("Press any key to continue...")
+    msvcrt.getch()  # Wait for user input to continue
+    clear_screen()  # Recursively call the function to clear the screen again
+    print("""
+        MOROW
+        
+           /\\
+          /00\\
+         /    \\
+         
+         If you want, you can still train in survival place before any fight you will have here.
+         
+    """)
+    time.sleep(3)
+    print("Press any key to continue...")
+    msvcrt.getch()  # Wait for user input to continue
+    clear_screen()  # Recursively call the function to clear the screen again
     
     
 def Game_rules():
@@ -1078,8 +1700,7 @@ def Game_rules():
             clear_screen()  # Recursively call the function to clear the screen again
         else:
             print("Invalid input. Please try again!")
-            clear_screen()  # Recursively call the function to clear the screen again
-    
+            clear_screen()  # Recursively call the function to clear the screen again    
     
 
 def start_story():
@@ -1125,9 +1746,93 @@ def start_story():
     Game_rules()
     
     
+'''
+def continue_story():
+    #print("continue_story")
+    #survival_start()#######
+    clear_screen()  # Recursively call the function to clear the screen again
+    legend_open = False
+    while not legend_open:
+        print("<Type L to open the legend.>")
+        choose = input()
+        if choose.lower() == "l":
+            print_legend()
+            legend_open = True
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("<Choose a valid number: >")#######
+            choose1 = input()
+            if choose1 == 1:
+                MAP()
+            elif choose1 == 2:
+                survival()
+            elif choose1 == 3:
+                tournament()
+            elif choose1 == 4:
+                store()
+            elif choose1 == 5:
+                bodyguards()
+            else:
+                print("Invalid input. Please try again!")
+                clear_screen()  # Recursively call the function to clear the screen again
+        else:
+            print("Invalid input. Please try again!")
+            clear_screen()  # Recursively call the function to clear the screen again
+    """
+    tournament_open = False
+    while not tournament_open:
+        print("<Type 3 to go to tournament place.>")
+        choose = input()
+        if choose== "3":
+            tournament()
+            tournament_open = True
+            clear_screen()  # Recursively call the function to clear the screen again
+        else:
+            print("Invalid input. Please try again!")
+            clear_screen()  # Recursively call the function to clear the screen again
+        survival_open = False
+    while not survival_open:
+        print("<Type 2 to go to survival.>")
+        choose = input()
+        if choose== "2":
+            survival_start()
+            survival_open = True
+            clear_screen()  # Recursively call the function to clear the screen again
+        else:
+            print("Invalid input. Please try again!")
+            clear_screen()  # Recursively call the function to clear the screen again
+    """
+'''
+    
     
 def continue_story():
-    print("continue_story")
+    clear_screen()  # Recursively call the function to clear the screen again
+    while True:
+        clear_screen()
+        legend_open = False
+        while not legend_open:
+            print("<Type L to open the legend.>")
+            choose = input()
+            if choose.lower() == "l":
+                print_legend()
+                legend_open = True
+            else:
+                print("Invalid input. Please try again!")
+                clear_screen()
+        print("<Choose a valid number: >")
+        choose1 = input()
+        if choose1 == "1":
+            MAP()
+        elif choose1 == "2":
+            survival()
+        elif choose1 == "3":
+            tournament()
+        elif choose1 == "4":
+            store()
+        elif choose1 == "5":
+            bodyguards()
+        else:
+            print("Invalid input. Please try again!")
+        input("<Press enter to continue>")
     
     
 def main_story():
