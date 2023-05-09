@@ -1156,10 +1156,10 @@ def survival():
     
     
 def tournament():
-    if not os.path.exists("tournament.txt"):
-        with open("tournament.txt", "w") as f:
+    if not os.path.exists("Tournament.txt"):
+        with open("Tournament.txt", "w") as f:
             f.write("30")
-    with open("tournament.txt", "r") as f:
+    with open("Tournament.txt", "r") as f:
         cnt = int(f.read())
     if cnt == 30:
         clear_screen()
@@ -1169,7 +1169,7 @@ def tournament():
         knight = Knight("", "", "")
         knight.load_data("knight.txt")
         #knight.print_attributes()
-        solider = Knight("Solider", "Sword", "Chainmail")
+        Kapa = Knight("Kapa", "Kapa's Sword", "Wind Armour")
         time.sleep(5)
         print("Press any key to continue...")
         msvcrt.getch()  # Wait for user input to continue
@@ -1178,21 +1178,21 @@ def tournament():
         print(KN_start)
         time.sleep(5)
         clear_screen()
-        print(KN_survival)
+        print(KN_T30)
         time.sleep(2)
         clear_screen()
         knight.ready_to_fight()
-        print(KN_survival)
+        print(KN_T30)
         #
         clear_screen()
-        knight.turn_survival_start(solider)
-        print(KN_survival)
+        knight.tournament30(Kapa)
+        print(KN_T30)
         print("Press any key to continue...")
         msvcrt.getch()  # Wait for user input to continue
         clear_screen()  # Recursively call the function to clear the screen again
         #knight.ready_to_fight()
         cnt -= 1
-        with open("tournament.txt", "w") as f:
+        with open("Tournament.txt", "w") as f:
             f.write(str(cnt))
     elif cnt == 29:
         print("Press any key to continue...")
@@ -1208,6 +1208,17 @@ def bodyguards():
 def store():
     print(Axe)
     print(Sword)
+    
+    
+KN_T30 = """
+     _                          __
+    /_\\                       |/\\
+   -_|_-                       \\/|
+    /|\\   _____         ___    ||
+   /|||\\-|_____/       |___|/-/||\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
     
     
 KN_start = """

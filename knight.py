@@ -219,6 +219,73 @@ class Knight:
             msvcrt.getch()  # Wait for user input to continue
             clear_screen()  # Recursively call the function to clear the screen again
             #pw += 2
+            
+    def tournament30(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(18, 25)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(20)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(14, 27)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T30 = """
+                 _                          __
+                /_\\                       |/\\
+               -_|_-                       \\/|
+                /|\\   _____         ___    ||
+               /|||\\-|_____/       |___|/-/||\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T30)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
 
 
 # Usage
