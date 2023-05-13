@@ -1,9 +1,10 @@
 import os
 import time
 import msvcrt
-from knight import Knight
+#from knight import Knight
 import matplotlib.pyplot as plt
 import mplcursors
+import random
 
 
 
@@ -14,12 +15,2368 @@ counter = 0
 '''
 
 
+class Knight:
+    def __init__(self, name, weapon, armor):
+        self.name = name
+        self.weapon = weapon
+        self.armor = armor
+        self.health = 100
+        self.coins = 0
+        
+    def load_data(self, file_name):
+        with open(file_name, "r") as file:
+            data = file.read().splitlines()
+            if len(data) >= 5:
+                self.name = data[0].split(": ")[1]
+                self.weapon = data[1].split(": ")[1]
+                self.armor = data[2].split(": ")[1]
+                self.health = int(data[3].split(": ")[1])
+                self.coins = int(data[4].split(": ")[1])
+            else:
+                print("Error: Invalid data format in knight.txt")
+        
+        print("""
+            KNIGHT
+            
+               /\\
+              /--\\
+             /    \\
+             
+             
+        """)
+        print(f"Name: {self.name}")
+        print(f"Weapon: {self.weapon}")
+        print(f"Armor: {self.armor}")
+        print(f"Health: {self.health}")
+        print(f"Coins: {self.coins}")
+
+    def attack(self):
+        return f"{self.name} attacks with {self.weapon}!"
+
+    def defend(self, damage):
+        self.health -= damage
+        if self.health <= 0:
+            return f"{self.name} has been defeated!"
+        else:
+            return f"{self.name} takes {damage} damage!"
+
+    def equip_armor(self, armor):
+        self.armor = armor
+        return f"{self.name} has {self.armor}!"
+
+    def get_health(self):
+        bar_size = 20  # size of the life bar
+        current_health = int((self.health / 100) * bar_size)
+        life_bar = "[" + "#" * current_health + "-" * (bar_size - current_health) + "]"
+        return f"{self.name}'s health: {life_bar}"
+
+    def print_attributes(self):
+        with open("knight.txt", "r") as f:
+            lines = f.readlines()
+            self.name = lines[0].strip()
+            self.weapon = lines[1].strip()
+            self.armor = lines[2].strip()
+            #self.health = int(lines[3].strip())
+            #self.coins = int(lines[4].strip())
+        print("""
+            KNIGHT
+            
+               /\\
+              /--\\
+             /    \\
+             
+             
+        """)
+        print(f"Name: {self.name}")
+        print(f"Weapon: {self.weapon}")
+        print(f"Armor: {self.armor}")
+        print(f"Health: {self.health}")
+        print(f"Coins: {self.coins}")  # add coins attribute
+        '''
+        with open("knight.txt", "w") as f:
+            f.write(f"Name: {self.name}\n")
+            f.write(f"Weapon: {self.weapon}\n")
+            f.write(f"Armor: {self.armor}\n")
+            f.write(f"Health: {self.health}\n")
+            f.write(f"Coins: {self.coins}\n")  # write coins attribute to file
+        '''
+
+    def store_coins(self, coins):
+        self.coins += coins
+        return f"{self.name} has stored {coins} coins!"
+
+    def open_data_knight(self):
+        with open("knight.txt", "r") as file:
+            data = file.read().splitlines()
+            if len(data) >= 5:
+                self.name = data[0].split(": ")[1]
+                self.weapon = data[1].split(": ")[1]
+                self.armor = data[2].split(": ")[1]
+                self.health = int(data[3].split(": ")[1])
+                self.coins = int(data[4].split(": ")[1])
+            else:
+                print("Error: Invalid data format in knight.txt")
+                
+    def ready_to_fight(self):
+        print("""
+            KNIGHT                      
+            
+               /\\
+              /--\\
+             /    \\
+             
+        """)
+        health_bar = self.get_health()
+        print(health_bar)
+        print("\n\n\n")
+        
+    def random_health_loss(self, damage):
+        health_loss = random.randint(1, damage)
+        self.health -= health_loss
+        if self.health <= 0:
+            return f"{self.name} has been defeated!"
+        else:
+            return f"{self.name} takes {health_loss} damage!"
+            
+    def create_knight(name, weapon, armor):
+        new_knight = Knight(name, weapon, armor)
+        with open("knight.txt", "w") as f:
+            f.write(f"Name: {new_knight.name}\n")
+            f.write(f"Weapon: {new_knight.weapon}\n")
+            f.write(f"Armor: {new_knight.armor}\n")
+            f.write(f"Health: {new_knight.health}\n")
+            f.write(f"Coins: {new_knight.coins}\n")
+        return new_knight
+
+
+        '''    
+    def turn_survival_start(self, enemy):
+        # Knight attacks enemy      
+        damage = random.randint(5, 20)
+        print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+        enemy.defend(damage)
+
+        # Enemy attacks Knight
+        damage = random.randint(2, 6)
+        print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+        self.defend(damage)
+        
+        print("""
+            KNIGHT                      
+            
+               /\\
+              /--\\
+             /    \\
+             
+        """)
+        health_bar = self.get_health()
+        health_bar_E = enemy.get_health()
+        print(health_bar + "            " + health_bar_E)
+        '''
+    def turn_survival_start(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(18, 25)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(11)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(1, 2)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_survival = """
+                 _
+                /_\\                        /\\
+               -_|_-                       \\/
+                /|\\   _____                ||
+               /|||\\-|_____/         ---/-/  \\
+                / \\                        / \\
+               /   \\                      /   \\
+            """
+            print(KN_survival)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            
+    def tournament30(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(18, 25)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(20)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     Congratulations!
+                     
+                """)
+                time.sleep(1)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     Congratulations!
+                     Keep it like this!
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(9, 17)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     Don't worry! You can try anytime and as many times as you want.
+                     
+                """)
+                time.sleep(1)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T30 = """
+                 _                          __
+                /_\\                       |/\\
+               -_|_-                       \\/|
+                /|\\   _____         ___    ||
+               /|||\\-|_____/       |___|/-/||\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T30)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            
+    def tournament29(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(9, 14)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(42)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     Good job! At the limit!
+                     
+                """)
+                time.sleep(1)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     Good job! At the limit!
+                     Your sword is a bit underwhelming...
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     How about we go to the store?
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     There you can upgrade your sword or buy something new!
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(22, 32)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     Get up!
+                     Don't worry! Your sword is almost broken.
+                     
+                """)
+                time.sleep(1)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     You must be careful...
+                     Anyway, let's go to the store.
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     You must be careful...
+                     Anyway, let's go to the store.
+                     You need a stronger weapon or at least repair this one.
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T29 = """
+                 _                         
+                /_\\                       ___
+               -_|_-                       \\/|
+                /|\\   _____               _||_
+               /|||\\-|_____/       /\\/|/-/||\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T29)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            
+    def tournament28(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(34, 42)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(42)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     How cool...
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     He didn't even have time to blink!
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(12, 15)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW
+                    
+                       /\\
+                      /00\\
+                     /    \\
+                     
+                     It's okay! Maybe next time!
+                     
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T29 = """
+                 _                         
+                /_\\                       ___
+               -_|_-                       \\/|
+                /|\\   _____               _||_
+               /|||\\-|_____/       /\\/|/-/||\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T29)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            
+    def tournament27(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(30, 38)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(67)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(16, 17)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T27 = """
+                 _                         -_-
+                /_\\                       /_\\_
+               -_|_-                      -_|_-
+                /|\\   _____               _|_
+               /|||\\-|_____/    --------|-/|\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T27)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     By the way, if you noticed, the damage you give to the opponent depends on his armor.
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     The exception is the soldiers, who train constantly to keep up with those who defeat them.
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            
+    def tournament26(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(30, 38)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(83)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(16, 17)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T26 = """
+                 _                        |-_-|
+                /_\\                      /..\\_
+               -_|_-                      -_|_-
+                /|\\   _____         _    _|||_
+               /|||\\-|_____/       |_|----/|\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T26)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            
+    def tournament25(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(30, 38)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(89)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(16, 17)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T25 = """
+                 _                        |-_-|
+                /_\\                      /..\\_
+               -_|_-                _    -_|_-
+                /|\\   _____        | |   _|||_
+               /|||\\-|_____/      || |----/|\\
+                / \\                |_|    / \\
+               /   \\                     /   \\
+            """
+            print(KN_T25)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            
+    def tournament24(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(30, 38)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(92)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(18, 24)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T24 = """
+                 _                        |-_-|
+                /_\\                      /..\\_
+               -_|_-                _    -_|_-
+                /|\\   _____        / \\  _|||_
+               /|||\\-|_____/       | |----/|\\
+                / \\                \_/    / \\
+               /   \\                     /   \\
+            """
+            print(KN_T24)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Perfect! You defeated the Iron Stray group!
+                     The last three were from this group.
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+
+    def tournament23(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(26, 30)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(102)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(16, 17)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T23 = """
+                 _                         -_-
+                /_\\                       |_|_
+               -_|_-                      -_|_-
+                /|\\   _____       ______  _|_
+               /|||\\-|_____/      |_____|-/|\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T23)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            
+    def tournament22(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(8, 12)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!")
+                self.store_coins(150)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(18, 24)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         Wow!...
+                         
+                """)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         It is the legendary Platemail armor...
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         I have never seen anything like this before.
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         Sorry... Anyway, we need to get better equipment!
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         So, we must immediately visit the Store.
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                clear_screen()
+                time.sleep(2)
+                # Generate a random sleep time between 1 and 10 seconds
+                sleep_time = random.randint(1, 7)
+                #print(f"Sleeping for {sleep_time} seconds...")
+                print("Loading your data...")
+                time.sleep(sleep_time)
+                clear_screen()
+                sleep_time = random.randint(1, 12)
+                print("Resuming your profile...")
+                time.sleep(sleep_time)
+                clear_screen()
+                time.sleep(2)
+                print("<Ok, you can choose something better or upgrade your equipment.>")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         Look! Legendary Armor!
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         Look! Legendary Armor!
+                         But it costs many coins...
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         I don't have that much and we have to get that coins!
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         Listen! I know who the guy is... I have a perfect deal:
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         Let this guy give me everything he has and, not only will I give him armor, but I will upgrade him.
+                         And I will also give him an amulet...
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         And the legendary weapon will be the Sword of Darkness.
+                         Exactly as in the armor theme: darkness and strong.
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         I kept this armor hidden... What you will see on the Bloody champion is a fake, but heavily upgraded.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         He is recognized by appearances, not by truth.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         He is recognized by appearances, not by truth.
+                         So, listen to me old man, I entrust you with this armor because you will succeed in defeating the Black Knight.
+                         I saw what you can do. You have potential and you are lucky to have Morow by your side.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         A long time ago, there was a rumor from a famous wizard that one day...
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         He predicted that someone strong enough would enter this land to defeat the Black Knight.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         There were several fighters who tried to free us from his curse, but they failed...
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         No one ever saw them again. We don't know where they disappeared.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         Only one fighter strong enough managed to reach the castle...
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         And through a flash of lightning appeared that statue that you see on your left, behind.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         Both in the hero's statue and in his stone sword, there is an essence of the Black Knight.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         And if somehow the sword will fall, the end will come...
+                         Soon I can say.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         The wizard predicted all these things and his manuscript has been kept secret for many years.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         No one is allowed to see more in the manuscript than has been said.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         The rest of the pages are blank as far as I understand, but...
+                         Only one person can see what is written on those pages and see with the mind's eye where that manuscript is.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         These words were read by the wizard himself that we discussed earlier.
+                         He wrote many things in that manuscript...
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         But he died, unfortunately.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         But he died, unfortunately.
+                         And no one knows anything about the manuscript anymore.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    SALES MAN                      
+                    
+                       /\\
+                      /\-\\
+                     /    \\
+                     
+                         It is said that there are dozens of pages that talk about...
+
+                         
+                """)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                time.sleep(5)
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         The sword just moved! Lucky it didn't fall...
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         Something is happening.
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                print("""
+                    MOROW                      
+                    
+                       /\\
+                      /OO\\
+                     /    \\
+                     
+                         Now, make the deal and let's go!
+
+                         
+                """)
+                time.sleep(3)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {0}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T22 = """
+                 _                       |___|
+                /_\\                     __\_/__
+               -_|_-                     -_|_-
+                /|\\   _____    _________  _|_
+               /|||\\-|_____/   \______/-|-/|\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T22)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            '''
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Wow!...
+                     
+            """)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     It is the legendary Platemail armor...
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     I have never seen anything like this before.
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Sorry... Anyway, we need to get better equipment!
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     So, we must immediately visit the Store.
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            clear_screen()
+            time.sleep(2)
+            # Generate a random sleep time between 1 and 10 seconds
+            sleep_time = random.randint(1, 7)
+            #print(f"Sleeping for {sleep_time} seconds...")
+            print("Loading your data...")
+            time.sleep(sleep_time)
+            clear_screen()
+            sleep_time = random.randint(1, 12)
+            print("Resuming your profile...")
+            time.sleep(sleep_time)
+            clear_screen()
+            time.sleep(2)
+            print("<Ok, you can choose something better or upgrade your equipment.>")
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Look! Legendary Armor!
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Look! Legendary Armor!
+                     But it costs many coins...
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     I don't have that much and we have to get that coins!
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     Listen! I know who the guy is... I have a perfect deal:
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     Let this guy give me everything he has and, not only will I give him armor, but I will upgrade him.
+                     And I will also give him an amulet...
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     And the legendary weapon will be the Sword of Darkness.
+                     Exactly as in the armor theme: darkness and strong.
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     I kept this armor hidden... What you will see on the Bloody champion is a fake, but heavily upgraded.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     He is recognized by appearances, not by truth.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     He is recognized by appearances, not by truth.
+                     So, listen to me old man, I entrust you with this armor because you will succeed in defeating the Black Knight.
+                     I saw what you can do. You have potential and you are lucky to have Morow by your side.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     A long time ago, there was a rumor from a famous wizard that one day...
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     He predicted that someone strong enough would enter this land to defeat the Black Knight.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     There were several fighters who tried to free us from his curse, but they failed...
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     No one ever saw them again. We don't know where they disappeared.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     Only one fighter strong enough managed to reach the castle...
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     And through a flash of lightning appeared that statue that you see on your left, behind.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     Both in the hero's statue and in his stone sword, there is an essence of the Black Knight.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     And if somehow the sword will fall, the end will come...
+                     Soon I can say.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     The wizard predicted all these things and his manuscript has been kept secret for many years.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     No one is allowed to see more in the manuscript than has been said.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     The rest of the pages are blank as far as I understand, but...
+                     Only one person can see what is written on those pages and see with the mind's eye where that manuscript is.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     These words were read by the wizard himself that we discussed earlier.
+                     He wrote many things in that manuscript...
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     But he died, unfortunately.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     But he died, unfortunately.
+                     And no one knows anything about the manuscript anymore.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                SALES MAN                      
+                
+                   /\\
+                  /\-\\
+                 /    \\
+                 
+                     It is said that there are dozens of pages that talk about...
+
+                     
+            """)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            time.sleep(5)
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     The sword just moved! Lucky it didn't fall...
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Something is happening.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Now, make the deal and let's go!
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            with open("knight.txt", "r+") as f:
+                lines = f.readlines()
+                lines[4] = f"Coins: {0}\n"
+                f.seek(0)
+                f.writelines(lines)
+            '''
+                
+    def tournament21(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(70, 90)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!\n\n\n")
+                print("SHOCK! The enemy is unconscious.\n\n")
+                self.store_coins(150)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(4, 8)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T21 = """
+               |___|                      |___|
+              __\_/__                    __\_/__
+               -_|_-                      -_|_-
+                _|_  _________  _________  _|_ 
+                /|\-|-\______/  \______/-|-/|\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T21)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     That's the true power of the Legendary Armor, son!
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     That's the true power of the Legendary Armor, son!
+                     From now on, it will be much easier.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     I forgot the amulet at the Store. I'll go get it.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     With that, the sales man will tell me more about it.
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Good luck, my disciple! 
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            print("""
+                MOROW                      
+                
+                   /\\
+                  /OO\\
+                 /    \\
+                 
+                     Good luck, my disciple! 
+                     You will do a good job even without my help!
+
+                     
+            """)
+            time.sleep(3)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            
+    def tournament20(self, enemy):
+        knight_health = self.health  # save the initial health of the Knight
+    
+        win = True
+        #pw = 0
+        while win:
+            # Knight attacks enemy      
+            damage = random.randint(70, 90)
+            print(f"{self.name} hits {enemy.name} with {self.weapon} for {damage} damage.")
+            #enemy.defend(damage + pw)
+            enemy.defend(damage)
+
+            # Check if enemy is defeated
+            if enemy.health <= 0:
+                print(f"{enemy.name} has been defeated! {self.name} wins!\n\n\n")
+                print("SHOCK! The enemy is unconscious.\n\n")
+                self.store_coins(150)
+                with open("knight.txt", "r+") as f:
+                    lines = f.readlines()
+                    lines[4] = f"Coins: {self.coins}\n"
+                    f.seek(0)
+                    f.writelines(lines)
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+
+            # Enemy attacks Knight
+            damage = random.randint(4, 8)
+            print(f"{enemy.name} hits {self.name} with {enemy.weapon} for {damage} damage.")
+            self.defend(damage)
+
+            # Check if Knight is defeated
+            if self.health <= 0:
+                print(f"{self.name} has been defeated! {enemy.name} wins!")
+                print("Press any key to continue...")
+                msvcrt.getch()  # Wait for user input to continue
+                clear_screen()  # Recursively call the function to clear the screen again
+                win = False
+                return
+                #break
+                
+            # Both Knight and enemy are still alive
+            print("""
+                KNIGHT                      
+                
+                   /\\
+                  /--\\
+                 /    \\
+                 
+            """)
+            health_bar = self.get_health()
+            health_bar_E = enemy.get_health()
+            print(health_bar + "            " + health_bar_E)
+            
+            # Save the current health of the Knight to the variable
+            knight_health = self.health
+            
+            KN_T20 = """
+               |___|                       ___
+              __\_/__                     _\_/_
+               -_|_-                       _|_
+                _|_  _________             _|_ 
+                /|\-|-\______/  --|--|---|-/|\\
+                / \\                       / \\
+               /   \\                     /   \\
+            """
+            print(KN_T20)
+            print("Press any key to continue...")
+            msvcrt.getch()  # Wait for user input to continue
+            clear_screen()  # Recursively call the function to clear the screen again
+            #pw += 2
+
+
+
 # Read the counter value from the file
 try:
     with open("data.txt", "r") as file:
         counter = int(file.read().strip())
 except FileNotFoundError:
     # If the file doesn't exist yet, set the counter to 0
+    #print("irnfurue")
     counter = 0
 
 
@@ -905,7 +3262,7 @@ def Hide_under_armor():
           /00\\
          /    \\
          
-         Now, I will present you a small map of the entire country.
+         Now, I will present you a small map of the entire land.
          
     """)
     time.sleep(5)
@@ -1195,19 +3552,737 @@ def tournament():
         with open("Tournament.txt", "w") as f:
             f.write(str(cnt))
     elif cnt == 29:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Spin = Knight("Spin", "Spin's Sword", "Buffallo")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T29)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T29)
+        #
+        clear_screen()
+        knight.tournament29(Spin)
+        print(KN_T29)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Now, let's see what we find here.
+             
+        """)
+        time.sleep(1.5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        time.sleep(2)
+        print("Loading")
+        time.sleep(0.3)
+        clear_screen()
+        print("Loading.")
+        time.sleep(0.5)
+        clear_screen()
+        print("Loading..")
+        time.sleep(1)
+        clear_screen()
+        print("Loading...")
+        time.sleep(1)
+        clear_screen()
+        print("Loading")
+        clear_screen()
+        print("Loading.")
+        time.sleep(2)
+        clear_screen()
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             With your money we can't buy something new... Or even upgrade your equipment.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             But I will give you money now for a small upgrade!
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        time.sleep(4)
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Here you go!
+             
+        """)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Here you go! Now, take a deep breath and try to fight again!
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+            
+        
+    elif cnt == 28:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Spin = Knight("Spin", "Spin's Sword", "Buffallo")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T29)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T29)
+        #
+        clear_screen()
+        knight.tournament28(Spin)
+        print(KN_T29)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 27:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Leadam = Knight("Leadam", "Katana", "Obsolette")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T27)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T27)
+        #
+        clear_screen()
+        knight.tournament27(Leadam)
+        print(KN_T27)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 26:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Matchet = Knight("Matchet", "Matchet's Mace", "Iron Stray")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T26)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T26)
+        #
+        clear_screen()
+        knight.tournament26(Matchet)
+        print(KN_T26)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 25:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Maya = Knight("Maya", "Maya's Hammer", "Iron Stray")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T25)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T25)
+        #
+        clear_screen()
+        knight.tournament25(Maya)
+        print(KN_T25)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 24:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Lion = Knight("Lion", "Lion's Lame", "Iron Stray")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T24)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T24)
+        #
+        clear_screen()
+        knight.tournament24(Lion)
+        print(KN_T24)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 23:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Buch = Knight("Buch", "Buch's Baton", "Common Legendary")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T23)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T23)
+        #
+        clear_screen()
+        knight.tournament23(Buch)
+        print(KN_T23)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 22:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Bloody = Knight("Bloody", "Bloody's Sword", "Legendary Platemail")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN_start)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T22)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T22)
+        #
+        clear_screen()
+        knight.tournament22(Bloody)
+        print(KN_T22)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 21:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight.create_knight("Knight", "Sword of Darkness", "Legendary Platemail")  # call the function using module name
+        #knight = Knight("", "", "")
+        #knight.load_data("knight.txt")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Bloody = Knight("Bloody", "Bloody's Sword", "Legendary Platemail")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T21)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T23)
+        #
+        clear_screen()
+        knight.tournament21(Bloody)
+        print(KN_T21)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 20:
+        clear_screen()
+        print("<Now, you can view your fighter data:>")
+        print("\n\n")
+        #knight = Knight("Knight", "Sword", "Platemail")
+        knight = Knight("", "", "")
+        knight.load_data("knight.txt")
+        #knight.print_attributes()
+        Wired = Knight("Wired", "Wired's Wierd Sword", "Iron Fist")
+        time.sleep(5)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        knight.ready_to_fight()
+        print(KN)
+        time.sleep(5)
+        clear_screen()
+        print(KN_T20)
+        time.sleep(2)
+        clear_screen()
+        knight.ready_to_fight()
+        print(KN_T20)
+        #
+        clear_screen()
+        knight.tournament20(Wired)
+        print(KN_T20)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        #knight.ready_to_fight()
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 19:
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Go, go!
+             The Black Knight saw that it was you who touched the statue!
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             I don't know how he realized...
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             We don't have time to talk anymore!
+             We have to move fast!
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        time.sleep(2)
+        print("To be continue...")
+        time.sleep(5)
+        clear_screen()
+        time.sleep(4)
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             There were at least 15 more champions to defeat, but you trained enough.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             I think that's why the sword moved.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             His nervousness made this…
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        time.sleep(2)
+        print("To be continue...")
+        time.sleep(5)
+        clear_screen()
+        time.sleep(4)
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Oh no!... Our cave is on fire...
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             It means that the only option is to go to the castle.
+             We have nowhere else to go.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             This is not just any fire, it is a fire that burns forever...
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Perfect! Even better!
+             You can use this amulet to devastate the entire castle!
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             It's just that... It has only one use.
+             It contains the magic of the wizard you heard about earlier.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             That amulet is very strong, no one knows about her, except the seller who was his very close friend.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Don't worry, son. The amulet will know when it's time to use it better than we do.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Don't worry, son. The amulet will know when it's time to use it better than we do.
+             It will light up when it wants to pulsate an unimaginable power.
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             It was an honor to have you by my side, Knight!
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        print("""
+            MOROW
+            
+               /\\
+              /00\\
+             /    \\
+             
+             Now go! I will sit here and watch this evil knight be defeated!
+             
+        """)
+        time.sleep(3)
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+        cnt -= 1
+        with open("Tournament.txt", "w") as f:
+            f.write(str(cnt))
+            
+    elif cnt == 18:
+        print("<No time to fight champions now!>")
+        print("<Go to the bodyguards!>")
         print("Press any key to continue...")
         msvcrt.getch()  # Wait for user input to continue
         clear_screen()  # Recursively call the function to clear the screen again
         
-    
+        
     
 def bodyguards():
+    if not os.path.exists("Tournament.txt"):
+        with open("Tournament.txt", "w") as f:
+            f.write("30")
+    if not os.path.exists("Bodyguards.txt"):
+        with open("Bodyguards.txt", "w") as f:
+            f.write("5")
+    with open("Tournament.txt", "r") as f:
+        cnt = int(f.read())
+    if cnt > 18:
+        print("<You are not trained enough to face the guards...>")
+        print("Press any key to continue...")
+        msvcrt.getch()  # Wait for user input to continue
+        clear_screen()  # Recursively call the function to clear the screen again
+    else:
+        bodyguards1()
+        
+        
+def bodyguards1():
     pass
     
     
 def store():
-    print(Axe)
-    print(Sword)
+    clear_screen()
+    time.sleep(2)
+    # Generate a random sleep time between 1 and 10 seconds
+    sleep_time = random.randint(1, 7)
+    #print(f"Sleeping for {sleep_time} seconds...")
+    print("Loading your data...")
+    time.sleep(sleep_time)
+    clear_screen()
+    sleep_time = random.randint(1, 12)
+    print("Resuming your profile...")
+    time.sleep(sleep_time)
+    clear_screen()
+    time.sleep(2)
+    print("<According to your evolution, no changes or improvements are necessary.>")
+    print("Press any key to continue...")
+    msvcrt.getch()  # Wait for user input to continue
+    clear_screen()  # Recursively call the function to clear the screen again
+    print("<We will see your evolution next time.>")
+    print("Press any key to continue...")
+    msvcrt.getch()  # Wait for user input to continue
+    clear_screen()  # Recursively call the function to clear the screen again
     
     
 KN_T30 = """
@@ -1219,7 +4294,117 @@ KN_T30 = """
     / \\                       / \\
    /   \\                     /   \\
 """
+
+
+KN_T29 = """
+     _                         
+    /_\\                       ___
+   -_|_-                       \\/|
+    /|\\   _____               _||_
+   /|||\\-|_____/       /\\/|/-/||\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
+
+
+KN_T27 = """
+     _                         -_-
+    /_\\                       /_\\_
+   -_|_-                      -_|_-
+    /|\\   _____               _|_
+   /|||\\-|_____/    --------|-/|\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
+
+
+KN_T26 = """
+     _                        |-_-|
+    /_\\                      /..\\_
+   -_|_-                      -_|_-
+    /|\\   _____         _    _|||_
+   /|||\\-|_____/       |_|----/|\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
+
+
+KN_T25 = """
+     _                        |-_-|
+    /_\\                      /..\\_
+   -_|_-                _    -_|_-
+    /|\\   _____        | |   _|||_
+   /|||\\-|_____/      || |----/|\\
+    / \\                |_|    / \\
+   /   \\                     /   \\
+"""
+
+
+KN_T24 = """
+     _                        |-_-|
+    /_\\                      /..\\_
+   -_|_-                _    -_|_-
+    /|\\   _____        / \\  _|||_
+   /|||\\-|_____/       | |----/|\\
+    / \\                \_/    / \\
+   /   \\                     /   \\
+"""
+
+
+KN_T23 = """
+     _                         -_-
+    /_\\                       |_|_
+   -_|_-                      -_|_-
+    /|\\   _____       ______  _|_
+   /|||\\-|_____/      |_____|-/|\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
+
+
+KN_T22 = """
+     _                       |___|
+    /_\\                     __\_/__
+   -_|_-                     -_|_-
+    /|\\   _____    _________  _|_
+   /|||\\-|_____/   \______/-|-/|\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
     
+
+KN_T21 = """
+   |___|                      |___|
+  __\_/__                    __\_/__
+   -_|_-                      -_|_-
+    _|_  _________  _________  _|_ 
+    /|\-|-\______/  \______/-|-/|\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
+
+
+KN_T20 = """
+   |___|                       ___
+  __\_/__                     _\_/_
+   -_|_-                       _|_
+    _|_  _________             _|_ 
+    /|\-|-\______/  --|--|---|-/|\\
+    / \\                       / \\
+   /   \\                     /   \\
+"""
+
+
+KN = """
+   |___|            
+  __\_/__           
+   -_|_-            
+    _|_  _________  
+    /|\-|-\______/  
+    / \\            
+   /   \\                            
+""" 
+
     
 KN_start = """
      _
@@ -1545,6 +4730,7 @@ def survival_start():
                 else:
                     print("Invalid input. Please try again!")
                     clear_screen()  # Recursively call the function to clear the screen again
+            cnt -= 1
 
 
 def tournament_start():
@@ -1591,7 +4777,9 @@ def tournament_start():
     print("Press any key to continue...")
     msvcrt.getch()  # Wait for user input to continue
     clear_screen()  # Recursively call the function to clear the screen again
-    
+    continue_story()###############
+    #main_story()#######
+#survival_start()#################################################    
     
 def Game_rules():
     print("<Legend>")
@@ -1844,22 +5032,44 @@ def continue_story():
         else:
             print("Invalid input. Please try again!")
         input("<Press enter to continue>")
-    
-    
+
+
+# Read the counter value from the file
+try:
+    with open("data.txt", "r") as file:
+        #print("is ok!")
+        counter = int(file.read().strip())
+except FileNotFoundError:
+    # If the file doesn't exist yet, set the counter to 0
+    counter = 0
+except Exception as e:
+    print(f"Error occurred while reading file: {e}")
+
 def main_story():
     global counter
     if counter >= 1:
         continue_story()
     elif counter == 0:
         start_story()
+        #print("Start story...\n\n\n")
         counter += 1
+        
         # Write the updated counter value to the file
-        with open("data.txt", "w") as file:
-            file.write(str(counter))
-            
+        try:
+            with open("data.txt", "w") as file:
+                #print("is ok")
+                file.write(str(counter))
+                #print(counter)
+        except Exception as e:
+            print(f"Error occurred while writing file: {e}")
+        
         # Read the counter value from the file to make sure memory and file are in sync
-        with open("data.txt", "r") as file:
-            counter = int(file.read().strip())
+        try:
+            with open("data.txt", "r") as file:
+                counter = int(file.read().strip())
+        except Exception as e:
+            print(f"Error occurred while reading file: {e}")
+
 
 
 #call functions
